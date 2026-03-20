@@ -8,6 +8,7 @@ const App = () => {
   const [estacao, setEstacao] = useState(null)
   const [data, setData] = useState(null)
   const [icone, setIcone] = useState(null)
+  const [mensagemDeErro, setMensagemDeErro] = useState(null)
 
   const obterEstacao = (dataAtual, latitude) => {
     const ano = dataAtual.getFullYear()
@@ -40,10 +41,12 @@ const App = () => {
         setLatitude(position.coords.latitude)
         setLongitude(position.coords.longitude)
         setEstacao(estacao)
+        setData(dataAtual.toLocaleTimeString())
         setIcone(icone)
       }, 
       (err) => {
         console.log(err)
+        setMensagemDeErro('Tente novamente mais tarde')
       }
     )
   }
@@ -73,7 +76,11 @@ const App = () => {
                <p className="text-center">
                 {
                   latitude ?
-                   `Coordenadas: ${latitude},${longitude}. Data: ${data}` :
+                   `Coordenadas: ${latitude},${longitude}. Data: ${data}` 
+                    :
+                  mensagemDeErro ?
+                      'É preciso permitir o acesso à localização para ver a sua estação climática'
+                    :
                    'Clique no botão para saber a sua estação climatica'
                 }
                </p>
