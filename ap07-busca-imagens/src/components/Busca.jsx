@@ -17,7 +17,7 @@ export default class Busca extends Component {
   onFormSubmit = (evento) => {
     evento.preventDefault()
     //chamar a função que chegou via props, passando o valor da variável de estado como parâmetro. Dica: qualifique o props com this.
-    console.log(this.state.termoDeBusca)
+    this.props.onBuscaRealizada(this.state.termoDeBusca)
 
   }
 
